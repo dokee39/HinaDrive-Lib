@@ -19,7 +19,7 @@ protected:
     ~MotorBase() = default;
 
 private:
-    enum eStatus : uint32_t {
+    enum eStatus : const uint32_t {
         eInit = 0, 
         eReady,
         eDetect,
@@ -32,6 +32,8 @@ private:
     };
 
     const portHardware &hardware;
+    
+    const Param &param_;
 
     eStatus status_;
 

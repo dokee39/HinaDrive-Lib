@@ -6,8 +6,9 @@
 namespace hina {
 class Inverter final {
 public:
-    explicit Inverter(const portHardware &hardware):
-        hardware(hardware) {
+    explicit Inverter(const Param &param, const portHardware &hardware):
+        hardware_(hardware),
+        param_(param) {
     }
     Inverter() = delete;
     ~Inverter() = default;
@@ -16,8 +17,8 @@ public:
 
     void FloatAll(void);
     void Brake(void);
-    void SixStepChangePhase(uint32_t step);
-    void SixStepSetDuty(float duty);
+    void SixStepChangePhase(int32_t &step);
+    void SixStepSetDuty(int32_t &step, float duty);
     // void Spwm();
     // void Svpwm();
     
@@ -37,9 +38,11 @@ private:
         { ePhaseB, ePhaseC, ePhaseA },
     };
 
-    const portHardware &hardware;
+    const portHardware &hardware_;
+    const Param &param_;
 
     inline void portSetFloat(ePhase phase);
+    inline void portUnsetFloat(ePhase phase);
     inline void portSetDuty(ePhase phase, float duty);
     inline void portSetDuty(float duty_a, float duty_b, float duty_c);
     inline float portGetDuty(ePhase phase);
