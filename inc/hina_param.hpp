@@ -16,7 +16,9 @@ enum eDir : const int32_t {
 };
 
 struct Param {
-    eDir dir;
+    const eDir dir;
+    const uint32_t timer_cnt_max = 65535;
+    const uint32_t timer_cnt_min = 50;
 };
 }
 

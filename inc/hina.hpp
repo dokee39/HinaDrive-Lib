@@ -2,7 +2,9 @@
 
 #include "hina_port_hardware.hpp"
 #include "hina_param.hpp"
-#include "hina_driver.hpp"
+#include "hina_inverter.hpp"
+#include "hina_timer.hpp"
+#include "hina_zero_cross_detector.hpp"
 
 namespace hina {
 class MotorBase {
@@ -39,7 +41,7 @@ private:
 
     Inverter inverter_;
 
-    float speed_;
+    float speed_ = 0.0f;
 
     void set_speed(const float speed) {
         speed_ = speed;
